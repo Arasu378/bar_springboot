@@ -1,5 +1,6 @@
 package com.arasu.bar.bar.application.controller.user_liquor;
 
+import com.arasu.bar.bar.application.entities.User;
 import com.arasu.bar.bar.application.entities.UserLiquor;
 import com.arasu.bar.bar.application.model.UserLiquorInput;
 import com.arasu.bar.bar.application.model.UserLiquorPictureInput;
@@ -15,6 +16,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Service
 public class UserLiquorService {
     private Logger log = LoggerFactory.getLogger(this.getClass());
@@ -22,16 +27,13 @@ public class UserLiquorService {
     private UserLiquorRepository userLiquorRepository;
 
     public Page<UserLiquor> getLiquorsByUserProfileId(Integer page, Integer size, Long userProfileId) {
-        Page pageOfUserLiquor = userLiquorRepository.findUserLiquorsByUserProfileId(userProfileId, PageRequest.of(page,size));
-        return pageOfUserLiquor;
+        return userLiquorRepository.findUserLiquorsByUserProfileId(userProfileId, PageRequest.of(page,size));
     }
     public Page<UserLiquor> getLiquorByBarId(Integer page, Integer size, Long barId) {
-        Page pageOfUserLiquor = userLiquorRepository.findUserLiquorsByBarId(barId, PageRequest.of(page,size));
-        return pageOfUserLiquor;
+        return userLiquorRepository.findUserLiquorsByBarId(barId, PageRequest.of(page,size));
     }
     public Page<UserLiquor> getLiquorBySectionId(Integer page, Integer size, Long sectionId) {
-        Page pageOfUserLiquor = userLiquorRepository.findUserLiquorsBySectionId(sectionId, PageRequest.of(page,size));
-        return pageOfUserLiquor;
+        return userLiquorRepository.findUserLiquorsBySectionId(sectionId, PageRequest.of(page,size));
     }
     public UserLiquorResponse getUserLiquorById(Long userLiquorId) {
         UserLiquor userLiquor = userLiquorRepository.findById(userLiquorId).orElseThrow(() -> new ResourceNotFoundException("UserLiquorId: "+ userLiquorId));
@@ -120,6 +122,15 @@ public class UserLiquorService {
         UserLiquor userLiquor = this.userLiquorRepository.findById(userLiquorId).orElseThrow(() -> new ResourceNotFoundException("UserLiquorId: "+userLiquorId));
         userLiquorRepository.delete(userLiquor);
         return new GeneralResponse(true, "deleted successfully!");
+    }
+    public Set<UserLiquor> getDistributors(Long userProfileId) {
+      List<UserLiquor> userLiquorList =  userLiquorRepository.getDistributors(userProfileId);
+        Set set = new HashSet(userLiquorList);
+        return set;
+
+    }
+    public List<UserLiquor> getParList(Long userProfileId) {
+        return userLiquorRepository.getParList(userProfileId);
     }
 
 }

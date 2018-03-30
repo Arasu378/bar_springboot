@@ -42,7 +42,7 @@ public class UserLiquor implements Serializable {
 
     @Column(name = "Shots")
     @JsonProperty("Shots")
-    private String shots;
+    private Long shots;
 
     @NotNull
     @NotBlank
@@ -56,7 +56,7 @@ public class UserLiquor implements Serializable {
 
     @Column(name = "ParLevel")
     @JsonProperty("ParLevel")
-    private String parLevel;
+    private Long parLevel;
 
     @Column(name = "DistributorName")
     @JsonProperty("DistributorName")
@@ -108,7 +108,7 @@ public class UserLiquor implements Serializable {
 
     @Column(name = "TotalBottles")
     @JsonProperty("TotalBottles")
-    private String totalBottles;
+    private Long totalBottles;
 
     public UserLiquor() {
     }
@@ -161,11 +161,11 @@ public class UserLiquor implements Serializable {
         this.liquorCapacity = liquorCapacity;
     }
 
-    public String getShots() {
+    public Long getShots() {
         return shots;
     }
 
-    public void setShots(String shots) {
+    public void setShots(Long shots) {
         this.shots = shots;
     }
 
@@ -185,11 +185,11 @@ public class UserLiquor implements Serializable {
         this.subCategory = subCategory;
     }
 
-    public String getParLevel() {
+    public Long getParLevel() {
         return parLevel;
     }
 
-    public void setParLevel(String parLevel) {
+    public void setParLevel(Long parLevel) {
         this.parLevel = parLevel;
     }
 
@@ -289,11 +289,11 @@ public class UserLiquor implements Serializable {
         this.emptyWeight = emptyWeight;
     }
 
-    public String getTotalBottles() {
+    public Long getTotalBottles() {
         return totalBottles;
     }
 
-    public void setTotalBottles(String totalBottles) {
+    public void setTotalBottles(Long totalBottles) {
         this.totalBottles = totalBottles;
     }
 }

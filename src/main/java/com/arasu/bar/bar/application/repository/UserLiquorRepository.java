@@ -8,6 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 public interface UserLiquorRepository extends PagingAndSortingRepository<UserLiquor,Long> {
     Page findUserLiquorsByUserProfileId(Long userProfileId, Pageable pageable);
@@ -78,5 +81,10 @@ public interface UserLiquorRepository extends PagingAndSortingRepository<UserLiq
                                      @Param("PictureId") Long PictureId,
                                      @Param("Id") Long Id
                                      );
+
+    @Query(value = "SELECT DistributorName, Id FROM user_liquor WHERE UserProfileId = :UserProfileId" , nativeQuery = true)
+    List<UserLiquor> getDistributors(@Param("UserProfileId")Long UserProfileId);
+    @Query(value = "SELECT * FROM user_liquor WHERE UserProfileId = :UserProfileId AND ParLevel < TotalBottles", nativeQuery = true)
+    List<UserLiquor> getParList(@Param("UserProfileId")Long UserProfileId);
 
 }

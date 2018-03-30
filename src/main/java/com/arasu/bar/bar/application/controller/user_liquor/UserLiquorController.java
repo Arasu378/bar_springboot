@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.Set;
 
 @RestController
 @Api(tags = {"UserLiquor"})
@@ -135,6 +137,29 @@ public class UserLiquorController extends AbstractRestHandler {
         GeneralResponse generalResponse = userLiquorService.deleteUserLiquor(liquorId);
         checkResourceFound(generalResponse);
         return generalResponse;
+    }
+
+    @RequestMapping(value = Constants.DISTRIBUTORS,
+    method = RequestMethod.GET,
+    produces = {"application/json", "application/xml"})
+    @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Get distributors.", notes = "Geting distributors list by passing userprofileId")
+    public
+    @ResponseBody
+    Set<UserLiquor> getDistributors (@ApiParam(value = "UserProfileId is required.", required = true)
+                                     @PathVariable("userProfileId")Long userProfileId) {
+        return userLiquorService.getDistributors(userProfileId);
+    }
+ @RequestMapping(value = Constants.PAR_LIST,
+    method = RequestMethod.GET,
+    produces = {"application/json", "application/xml"})
+    @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Get ParList.", notes = "Geting distributors list by passing userprofileId")
+    public
+    @ResponseBody
+ List<UserLiquor> getParList (@ApiParam(value = "UserProfileId is required.", required = true)
+                                     @PathVariable("userProfileId")Long userProfileId) {
+        return userLiquorService.getParList(userProfileId);
     }
 
 }

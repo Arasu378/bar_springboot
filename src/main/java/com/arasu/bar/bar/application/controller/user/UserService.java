@@ -80,8 +80,8 @@ public class UserService implements UserDetailsService {
         return 0L;
 
     }
-    public Long updateUserManagement(UserManagementUpdate userManagementUpdate, Long userProfileId) throws Exception {
-        User user = this.userRepository.findById(userProfileId).orElseThrow(() -> new ResourceNotFoundException("UserProfileId : " +userProfileId));
+    public Long updateUserManagement(UserManagementUpdate userManagementUpdate, Long userManagementId) throws Exception {
+        User user = this.userRepository.findById(userManagementId).orElseThrow(() -> new ResourceNotFoundException("UserProfileId : " +userManagementId));
         user.setUserFirstName(userManagementUpdate.getUserFirstName());
         user.setUserLastName(userManagementUpdate.getUserLastName());
         user.setUserVenueName(userManagementUpdate.getUserVenueName());

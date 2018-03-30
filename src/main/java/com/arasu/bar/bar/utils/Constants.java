@@ -3,6 +3,10 @@ package com.arasu.bar.bar.utils;
 public class Constants {
     public static final String LOGIN = "/login";
     public static final String USERS = "/users";
+    public static final String USER_MANAGEMENT = "/userManagements/{userProfileId}";
+    public static final String USER_MANAGEMENT_BY_ID = "/{userManagementId}";
+    public static final String INSERT_USER_MANAGEMENT = "/{userManagementId}";
+    public static final String UPDATE_USER_MANAGEMENT = "";
     public static final String USER = "/{userProfileId}";
     public static final String REGISTER = "/register";
     public static final String UPDATE_USER_PROFILE = "/updateProfile/{userProfileId}";
@@ -39,6 +43,8 @@ public class Constants {
     public static final String LIQUOR_CATEGORY = "/category";
     public static final String GENERATE_TOKEN = "/generate-token";
     public static final String LIQUOR_CATEGORY_NAME = "/categoryName/{category}";
+    public static final String DISTRIBUTORS = "/distributors/{userProfileId}";
+    public static final String PAR_LIST = "/parList/{userProfileId}";
 
 
 }

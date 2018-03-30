@@ -88,7 +88,7 @@ public class UserManagementService {
         return new GeneralResponse(true, "success");
     }
 
-    public UserManagementResponse insertUserProfileToUserMangement(UserManagementInput userManagementInput) throws Exception {
+    public UserManagementResponse insertUserProfileToUserManagement(UserManagementInput userManagementInput) throws Exception {
         Register register = new Register();
         register.setUserFirstName(userManagementInput.getUserFirstName());
         register.setUserLastName(userManagementInput.getUserLastName());
