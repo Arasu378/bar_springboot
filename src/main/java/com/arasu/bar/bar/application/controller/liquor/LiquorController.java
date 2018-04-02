@@ -2,6 +2,7 @@ package com.arasu.bar.bar.application.controller.liquor;
 
 import com.arasu.bar.bar.application.AbstractRestHandler;
 import com.arasu.bar.bar.application.entities.Liquor;
+import com.arasu.bar.bar.application.model.LiquorCategory;
 import com.arasu.bar.bar.utils.Constants;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ import java.util.Set;
         @ApiResponse(code=404,message="Not Found - resource doesn't exist for the specified id."),
         @ApiResponse(code=500,message="Internal Server error."),
 })
+@CrossOrigin(value = "*", maxAge = 3600, allowCredentials = "false")
 public class LiquorController  extends AbstractRestHandler {
     private Logger log = LoggerFactory.getLogger(this.getClass());
     @Autowired
@@ -47,7 +49,7 @@ public class LiquorController  extends AbstractRestHandler {
             produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Get paginated list of all LIQUOR category list.", notes = "The list is paginated. You can provide a page number (default 0) and a page size (default 100)")
-    public Set<String> getCategoryList() {
+    public List<LiquorCategory>  getCategoryList() {
         return this.liquorService.getLiquorCategory();
     }
     @RequestMapping(value = Constants.LIQUOR_CATEGORY_NAME,

@@ -61,6 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     authorizeRequests()
                 .antMatchers("/user/register").permitAll()
                 .antMatchers("/user/login").permitAll()
+                .antMatchers("/picture/category/**").permitAll()
                 .antMatchers("/user/forgetPassword/**").permitAll()
                 .antMatchers("/token/generate-token").permitAll()
                 .antMatchers(AUTH_WHITELIST).permitAll()

@@ -4,6 +4,7 @@ import com.arasu.bar.bar.application.entities.User;
 import com.arasu.bar.bar.application.entities.UserLiquor;
 import com.arasu.bar.bar.application.model.UserLiquorInput;
 import com.arasu.bar.bar.application.model.UserLiquorPictureInput;
+import com.arasu.bar.bar.application.repository.LiquorCategoryRepository;
 import com.arasu.bar.bar.application.repository.UserLiquorRepository;
 import com.arasu.bar.bar.exception.ResourceNotFoundException;
 import com.arasu.bar.bar.responses.GeneralResponse;
@@ -25,6 +26,7 @@ public class UserLiquorService {
     private Logger log = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private UserLiquorRepository userLiquorRepository;
+
 
     public Page<UserLiquor> getLiquorsByUserProfileId(Integer page, Integer size, Long userProfileId) {
         return userLiquorRepository.findUserLiquorsByUserProfileId(userProfileId, PageRequest.of(page,size));

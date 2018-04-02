@@ -27,9 +27,11 @@ import org.springframework.web.multipart.MultipartFile;
         @ApiResponse(code=404,message="Not Found - resource doesn't exist for the specified id."),
         @ApiResponse(code=500,message="Internal Server error."),
 })
+@CrossOrigin(value = "*", maxAge = 3600, allowCredentials = "false")
 public class UserLiquorPictureController extends AbstractRestHandler {
     @Autowired
     private UserLiquorPictureService userLiquorPictureService;
+
     @RequestMapping(method = RequestMethod.GET,value = Constants.PICTURE,
             produces = MediaType.IMAGE_PNG_VALUE)
     @ResponseStatus(HttpStatus.OK)
@@ -39,6 +41,20 @@ public class UserLiquorPictureController extends AbstractRestHandler {
             @PathVariable("pictureId")Long pictureId) throws Exception {
         return userLiquorPictureService.getAttachedPictureById(pictureId);
     }
+
+    @RequestMapping(method = RequestMethod.GET,value = Constants.CATEGORY_PICTURE,
+            produces = MediaType.IMAGE_PNG_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Get a picture response.", notes = "Picture for User liquor.")
+    public @ResponseBody
+    ResponseEntity<InputStreamResource> getLiquorCategoryName(@ApiParam(value = "Picture Id ",required = true)
+                                                              @PathVariable("pictureId")Long pictureId) throws Exception {
+        return userLiquorPictureService.getLiquorCategoryName(pictureId);
+    }
+
+
+
+
     @RequestMapping(value = Constants.INSERT_PICTURE,
             method = RequestMethod.POST,
             produces = {"application/json", "application/xml"},

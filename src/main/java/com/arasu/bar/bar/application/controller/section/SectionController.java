@@ -30,6 +30,7 @@ import javax.validation.Valid;
         @ApiResponse(code=404,message="Not Found - resource doesn't exist for the specified id."),
         @ApiResponse(code=500,message="Internal Server error."),
 })
+@CrossOrigin(value = "*", maxAge = 3600, allowCredentials = "false")
 public class SectionController extends AbstractRestHandler {
     private Logger log = LoggerFactory.getLogger(this.getClass());
     @Autowired

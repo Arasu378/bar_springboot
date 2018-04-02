@@ -36,7 +36,7 @@ import javax.servlet.http.HttpServletResponse;
         @ApiResponse(code=404,message="Not Found - resource doesn't exist for the specified id."),
         @ApiResponse(code=500,message="Internal Server error."),
 })
-@CrossOrigin(value = "*", maxAge = 3600)
+@CrossOrigin(value = "*", maxAge = 3600, allowCredentials = "false")
 public class UserController extends AbstractRestHandler {
     private Logger log = LoggerFactory.getLogger(this.getClass());
 

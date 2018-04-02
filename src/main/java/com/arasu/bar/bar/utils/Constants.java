@@ -29,6 +29,7 @@ public class Constants {
     public static final String UPDATE_EMAIL = "/{emailId}";
     public static final String DELETE_EMAIL = "/{emailId}";
     public static final String PICTURE = "/{pictureId}";
+    public static final String CATEGORY_PICTURE = "category/{pictureId}";
     public static final String INSERT_PICTURE = "";
     public static final String UPDATE_PICTURE = "/{pictureId}";
     public static final String DELETE_PICTURE = "/{pictureId}";
@@ -46,5 +47,7 @@ public class Constants {
     public static final String DISTRIBUTORS = "/distributors/{userProfileId}";
     public static final String PAR_LIST = "/parList/{userProfileId}";
 
+
+    public static final String PICTURE_URL = "http://192.168.1.18:8091/bar/v1/picture/category/";
 
 }

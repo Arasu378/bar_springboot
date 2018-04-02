@@ -1,7 +1,9 @@
 package com.arasu.bar.bar.application.controller.user_liquor_picture;
 
+import com.arasu.bar.bar.application.entities.LiquorCategory;
 import com.arasu.bar.bar.application.entities.User;
 import com.arasu.bar.bar.application.entities.UserLiquorPicture;
+import com.arasu.bar.bar.application.repository.LiquorCategoryRepository;
 import com.arasu.bar.bar.application.repository.UserLiquorPictureRepository;
 import com.arasu.bar.bar.exception.ResourceNotFoundException;
 import com.arasu.bar.bar.responses.GeneralResponse;
@@ -27,6 +29,11 @@ public class UserLiquorPictureService {
     private Logger log = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private UserLiquorPictureRepository pictureRepository;
+
+    @Autowired
+    private LiquorCategoryRepository liquorCategoryRepository;
+
+
     public Page<UserLiquorPicture> getPicturesByUserProfileId(Integer page, Integer size, Long userProfileId) {
         Page pageOfUserLiquorPicture = pictureRepository.findUserLiquorPicturesByUserProfileId(userProfileId, PageRequest.of(page,size));
         return pageOfUserLiquorPicture;
@@ -37,6 +44,16 @@ public class UserLiquorPictureService {
     public ResponseEntity<InputStreamResource> getAttachedPictureById(Long pictureId) throws Exception {
         UserLiquorPicture userLiquorPicture = pictureRepository.findById(pictureId).orElseThrow(() -> new ResourceNotFoundException("PictureId : "+pictureId));
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(userLiquorPicture.getData());
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.IMAGE_PNG)
+                .body(new InputStreamResource(byteArrayInputStream));
+
+    }
+
+    public ResponseEntity<InputStreamResource> getLiquorCategoryName(Long pictureId) throws Exception {
+        LiquorCategory liquorCategory  = liquorCategoryRepository.findById(pictureId).orElseThrow(() -> new ResourceNotFoundException("PictureId : "+ pictureId));
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(liquorCategory.getData());
         return ResponseEntity
                 .ok()
                 .contentType(MediaType.IMAGE_PNG)
