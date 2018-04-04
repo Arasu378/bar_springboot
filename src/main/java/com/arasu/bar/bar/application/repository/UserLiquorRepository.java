@@ -21,11 +21,11 @@ public interface UserLiquorRepository extends PagingAndSortingRepository<UserLiq
     @Query(value = "INSERT INTO `bar`.`user_liquor`" +
             " (`UserProfileId`, `BarId`, `SectionId`, `LiquorName`, `LiquorCapacity`, `Shots`, `Category`, `SubCategory`," +
             " `ParLevel`, `DistributorName`, `PriceUnit`, `BinNumber`, `ProductCode`, `CreatedOn`, `MinValue`, `MaxValue`," +
-            " `Type`, `FullWeight`, `EmptyWeight`, `TotalBottles`, `PictureId`) " +
+            " `Type`, `FullWeight`, `EmptyWeight`, `TotalBottles`, `PictureId`, `DistributorId`) " +
             "VALUES" +
             " (:UserProfileId, :BarId, :SectionId, :LiquorName, :LiquorCapacity, :Shots, :Category, :SubCategory," +
             " :ParLevel, :DistributorName, :PriceUnit, :BinNumber, :ProductCode, :CreatedOn, :MinValue, :MaxValue," +
-            " :Type, :FullWeight, :EmptyWeight, :TotalBottles, :PictureId)", nativeQuery = true)
+            " :Type, :FullWeight, :EmptyWeight, :TotalBottles, :PictureId, :DistributorId)", nativeQuery = true)
     Integer insertUserLiquorQuery(@Param("UserProfileId")Long UserProfileId,
                                      @Param("BarId") Long BarId,
                                      @Param("SectionId") Long SectionId,
@@ -46,7 +46,8 @@ public interface UserLiquorRepository extends PagingAndSortingRepository<UserLiq
                                      @Param("FullWeight") String FullWeight,
                                      @Param("EmptyWeight") String EmptyWeight,
                                      @Param("TotalBottles") Integer TotalBottles,
-                                     @Param("PictureId") Long PictureId
+                                     @Param("PictureId") Long PictureId,
+                                     @Param("DistributorId") Long DistributorId
                                      );
 
      @Transactional
@@ -56,7 +57,7 @@ public interface UserLiquorRepository extends PagingAndSortingRepository<UserLiq
             ", `Shots` = :Shots, `Category` = :Category, `SubCategory` = :SubCategory," +
             " `ParLevel` = :ParLevel, `DistributorName` = :DistributorName, `PriceUnit` = :PriceUnit, `BinNumber` = :BinNumber, `ProductCode` = :ProductCode," +
             " `ModifiedOn` = :ModifiedOn, `MinValue` = :MinValue, `MaxValue` = :MaxValue," +
-            " `Type` = :Type, `FullWeight` = :FullWeight, `EmptyWeight` = :EmptyWeight, `TotalBottles` = :TotalBottles, `PictureId` = :PictureId " +
+            " `Type` = :Type, `FullWeight` = :FullWeight, `EmptyWeight` = :EmptyWeight, `TotalBottles` = :TotalBottles, `PictureId` = :PictureId, `DistributorId` = :DistributorId " +
             "WHERE `Id` = :Id", nativeQuery = true)
     Integer updateUserLiquorQuery(@Param("UserProfileId")Long UserProfileId,
                                      @Param("BarId") Long BarId,
@@ -79,12 +80,16 @@ public interface UserLiquorRepository extends PagingAndSortingRepository<UserLiq
                                      @Param("EmptyWeight") String EmptyWeight,
                                      @Param("TotalBottles") Integer TotalBottles,
                                      @Param("PictureId") Long PictureId,
-                                     @Param("Id") Long Id
+                                     @Param("Id") Long Id,
+                                     @Param("DistributorId") Long DistributorId
                                      );
 
     @Query(value = "SELECT DistributorName, Id FROM user_liquor WHERE UserProfileId = :UserProfileId" , nativeQuery = true)
     List<UserLiquor> getDistributors(@Param("UserProfileId")Long UserProfileId);
     @Query(value = "SELECT * FROM user_liquor WHERE UserProfileId = :UserProfileId AND ParLevel < TotalBottles", nativeQuery = true)
     List<UserLiquor> getParList(@Param("UserProfileId")Long UserProfileId);
+
+    @Query(value = "SELECT DISTINCT `DistributorName`, `Id` FROM user_liquor WHERE UserProfileId = :UserProfileId", nativeQuery = true)
+    List<Object[]> getDistributorsList(@Param("UserProfileId") Long UserProfileId);
 
 }

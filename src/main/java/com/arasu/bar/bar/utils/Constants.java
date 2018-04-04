@@ -13,10 +13,15 @@ public class Constants {
     public static final String FORGET_PASSWORD = "/forgetPassword";
     public static final String UPDATE_PASSWORD = "/updatePassword";
     public static final String BARS = "/bars/{userProfileId}";
+    public static final String DISTRIBUTOR = "/distributors/{userProfileId}";
     public static final String BAR = "/{barId}";
+    public static final String DISTRIBUTOR_BY_ID = "/{distributorId}";
     public static final String INSERT_BAR = "";
+    public static final String INSERT_DISTRIBUTOR = "";
     public static final String UPDATE_BAR = "/{barId}";
+    public static final String UPDATE_DISTRIBUTOR = "/{distributorId}";
     public static final String DELETE_BAR = "/{barId}";
+    public static final String DELETE_DISTRIBUTOR = "/{distributorId}";
     public static final String SECTIONS_USERPROFILEID = "/sectionsByUserProfileId/{userProfileId}";
     public static final String SECTIONS_BARID = "/sectionsByBarId/{barId}";
     public static final String SECTION = "/{sectionId}";
@@ -41,6 +46,7 @@ public class Constants {
     public static final String INSERT_USER_LIQUOR = "";
     public static final String INSERT_USER_LIQUOR_WITH_PICTURE= "/picture";
     public static final String UPDATE_USER_LIQUOR = "/{liquorId}";
+    public static final String UPDATE_USER_LIQUOR_PICTURE = "picture/{liquorId}";
     public static final String DELETE_USER_LIQUOR = "/{liquorId}";
     public static final String LIQUOR = "/liquors";
     public static final String LIQUOR_CATEGORY = "/category";

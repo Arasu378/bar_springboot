@@ -13,7 +13,7 @@ public class UserLiquor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    @JsonProperty("Id")
+    @JsonProperty("BottleId")
     private Long id;
 
     @Column(name = "UserProfileId")

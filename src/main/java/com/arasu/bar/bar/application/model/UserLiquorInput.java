@@ -90,6 +90,10 @@ public class UserLiquorInput {
     @JsonProperty("PictureURL")
     public String pictureURL;
 
+    @JsonProperty("DistributorId")
+    public Long distributorId;
+
+
 
     public UserLiquorInput(){}
 }

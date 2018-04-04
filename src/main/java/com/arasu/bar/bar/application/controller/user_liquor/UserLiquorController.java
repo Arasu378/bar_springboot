@@ -2,6 +2,7 @@ package com.arasu.bar.bar.application.controller.user_liquor;
 
 import com.arasu.bar.bar.application.AbstractRestHandler;
 import com.arasu.bar.bar.application.entities.UserLiquor;
+import com.arasu.bar.bar.application.model.Distributors;
 import com.arasu.bar.bar.application.model.UserLiquorInput;
 import com.arasu.bar.bar.responses.GeneralResponse;
 import com.arasu.bar.bar.responses.UserLiquorResponse;
@@ -146,6 +147,23 @@ public class UserLiquorController extends AbstractRestHandler {
         checkResourceFound(userLiquorResponse);
         return userLiquorResponse;
     }
+
+    @RequestMapping(value = Constants.UPDATE_USER_LIQUOR_PICTURE,
+            method = RequestMethod.PUT,
+            produces = {"application/json", "application/xml"},
+            consumes = {"application/json", "application/xml"})
+    @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Update User liquor", notes = "Updating user Liquor.")
+    public
+    @ResponseBody
+    UserLiquorResponse updateUserLiquorPicture(@ApiParam(value = "The userLiquor  input json is required.", required = true)
+                                        @RequestBody UserLiquorInput userLiquorInput,
+                                        @ApiParam(value = "The User liquor id is required.", required = true)
+                                        @PathVariable("liquorId") Long liquorId) throws Exception {
+        UserLiquorResponse userLiquorResponse = userLiquorService.updateUserLiquorPicture(userLiquorInput,liquorId);
+        checkResourceFound(userLiquorResponse);
+        return userLiquorResponse;
+    }
     @RequestMapping(value = Constants.DELETE_USER_LIQUOR,
             method = RequestMethod.DELETE,
             produces = {"application/json", "application/xml"})
@@ -167,7 +185,7 @@ public class UserLiquorController extends AbstractRestHandler {
     @ApiOperation(value = "Get distributors.", notes = "Geting distributors list by passing userprofileId")
     public
     @ResponseBody
-    Set<UserLiquor> getDistributors (@ApiParam(value = "UserProfileId is required.", required = true)
+    List<Distributors> getDistributors (@ApiParam(value = "UserProfileId is required.", required = true)
                                      @PathVariable("userProfileId")Long userProfileId) {
         return userLiquorService.getDistributors(userProfileId);
     }
