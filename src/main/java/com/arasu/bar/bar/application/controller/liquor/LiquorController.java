@@ -64,6 +64,9 @@ public class LiquorController  extends AbstractRestHandler {
                                       @ApiParam(value = "The Category ", required = true)
                                       @PathVariable("category") String category,
                                       HttpServletRequest request, HttpServletResponse response) {
+                                        if (category.equals("whisky")) {
+                                            category = "Whiskey / Whisky";
+                                        }
         return this.liquorService.getAllLiquorByCategory(category,page, size);
     }
 }

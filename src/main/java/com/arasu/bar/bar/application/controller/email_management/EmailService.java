@@ -1,13 +1,11 @@
 package com.arasu.bar.bar.application.controller.email_management;
 
 import com.arasu.bar.bar.application.entities.Email;
-import com.arasu.bar.bar.application.entities.Section;
 import com.arasu.bar.bar.application.model.EmailInput;
 import com.arasu.bar.bar.application.repository.EmailManagementRepository;
-import com.arasu.bar.bar.exception.ResourceNotFoundException;
+import com.arasu.bar.bar.application.exception.ResourceNotFoundException;
 import com.arasu.bar.bar.responses.EmailResponse;
 import com.arasu.bar.bar.responses.GeneralResponse;
-import com.arasu.bar.bar.responses.SectionResponse;
 import com.arasu.bar.bar.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -7,6 +7,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "usermanagement")
@@ -57,6 +60,13 @@ public class UserManagement implements Serializable {
     @Column(name = "UserLastName")
     @JsonProperty("UserLastName")
     private String userLastName;
+
+//    @OneToMany(cascade = CascadeType.ALL,
+//    fetch = FetchType.LAZY,
+//    mappedBy = "barList")
+//    private Set<UserManagementBar> barList = new HashSet<>();
+//
+//
 
     public UserManagement() {
     }
@@ -140,4 +150,12 @@ public class UserManagement implements Serializable {
     public void setUserLastName(String userLastName) {
         this.userLastName = userLastName;
     }
+
+//    public Set<UserManagementBar> getBarList() {
+//        return barList;
+//    }
+//
+//    public void setBarList(Set<UserManagementBar> barList) {
+//        this.barList = barList;
+//    }
 }

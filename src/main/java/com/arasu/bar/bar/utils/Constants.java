@@ -5,7 +5,7 @@ public class Constants {
     public static final String USERS = "/users";
     public static final String USER_MANAGEMENT = "/userManagements/{userProfileId}";
     public static final String USER_MANAGEMENT_BY_ID = "/{userManagementId}";
-    public static final String INSERT_USER_MANAGEMENT = "/{userManagementId}";
+    public static final String INSERT_USER_MANAGEMENT = "";
     public static final String UPDATE_USER_MANAGEMENT = "";
     public static final String USER = "/{userProfileId}";
     public static final String REGISTER = "/register";
@@ -31,6 +31,7 @@ public class Constants {
     public static final String PICTURE = "/{pictureId}";
     public static final String CATEGORY_PICTURE = "category/{pictureId}";
     public static final String INSERT_PICTURE = "";
+    public static final String INSERT_PICTURE_URL = "/url";
     public static final String UPDATE_PICTURE = "/{pictureId}";
     public static final String DELETE_PICTURE = "/{pictureId}";
     public static final String USER_LIQUOR_BY_USER_PROFILEID = "userProfile/{userProfileId}";
@@ -38,6 +39,7 @@ public class Constants {
     public static final String USER_LIQUOR_BY_SECTION_ID = "section/{sectionId}";
     public static final String USER_LIQUOR_BY_ID = "/liquor/{liquorId}";
     public static final String INSERT_USER_LIQUOR = "";
+    public static final String INSERT_USER_LIQUOR_WITH_PICTURE= "/picture";
     public static final String UPDATE_USER_LIQUOR = "/{liquorId}";
     public static final String DELETE_USER_LIQUOR = "/{liquorId}";
     public static final String LIQUOR = "/liquors";
@@ -48,6 +50,6 @@ public class Constants {
     public static final String PAR_LIST = "/parList/{userProfileId}";
 
 
-    public static final String PICTURE_URL = "http://192.168.1.16:8091/bar/v1/picture/category/";
+    public static final String PICTURE_URL = "http://192.168.1.19:8091/bar/v1/picture/category/";
 
 }

@@ -1,7 +1,7 @@
 package com.arasu.bar.bar.application;
 
 import com.arasu.bar.bar.domain.RestErrorInfo;
-import com.arasu.bar.bar.exception.ResourceNotFoundException;
+import com.arasu.bar.bar.application.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;

@@ -27,6 +27,11 @@ public class UserLiquorPictureInput {
     @JsonProperty("PictureName")
     public String pictureName;
 
+    @NotBlank
+    @NotNull
+    @JsonProperty("PictureURL")
+    public String pictureURL;
+
 
     public UserLiquorPictureInput(){}
 }

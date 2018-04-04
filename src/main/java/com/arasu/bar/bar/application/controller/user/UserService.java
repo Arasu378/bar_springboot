@@ -4,7 +4,7 @@ import com.arasu.bar.bar.application.EmailServiceImpl;
 import com.arasu.bar.bar.application.model.*;
 import com.arasu.bar.bar.application.repository.UserRepository;
 import com.arasu.bar.bar.application.entities.User;
-import com.arasu.bar.bar.exception.ResourceNotFoundException;
+import com.arasu.bar.bar.application.exception.ResourceNotFoundException;
 import com.arasu.bar.bar.responses.GeneralResponse;
 import com.arasu.bar.bar.responses.LoginResponse;
 import com.arasu.bar.bar.utils.PasswordChecker;

@@ -96,6 +96,7 @@ public class UserLiquorController extends AbstractRestHandler {
                                               @PathVariable("liquorId") Long id) throws Exception {
         return this.userLiquorService.getUserLiquorById(id);
     }
+
     @RequestMapping(value = Constants.INSERT_USER_LIQUOR,
     method = RequestMethod.POST,
     produces = {"application/json", "application/xml"},
@@ -110,6 +111,25 @@ public class UserLiquorController extends AbstractRestHandler {
         checkResourceFound(userLiquorResponse);
         return userLiquorResponse;
     }
+
+      @RequestMapping(value = Constants.INSERT_USER_LIQUOR_WITH_PICTURE,
+    method = RequestMethod.POST,
+    produces = {"application/json", "application/xml"},
+    consumes = {"application/json", "application/xml"})
+    @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Insert User liquor", notes = "Inserting user Liquor.")
+    public
+    @ResponseBody
+    UserLiquorResponse insertUserLiquorWithPicture(@ApiParam(value = "The userLiquor  input json is required.", required = true)
+                                        @RequestBody UserLiquorInput userLiquorInput) throws Exception {
+        UserLiquorResponse userLiquorResponse = userLiquorService.insertUserLiquorWithPictureURL(userLiquorInput);
+        checkResourceFound(userLiquorResponse);
+        return userLiquorResponse;
+    }
+
+
+
+
     @RequestMapping(value = Constants.UPDATE_USER_LIQUOR,
             method = RequestMethod.PUT,
             produces = {"application/json", "application/xml"},

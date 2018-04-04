@@ -4,7 +4,7 @@ import com.arasu.bar.bar.application.entities.Bar;
 import com.arasu.bar.bar.application.model.BarInput;
 import com.arasu.bar.bar.application.model.BarUpdate;
 import com.arasu.bar.bar.application.repository.BarRepository;
-import com.arasu.bar.bar.exception.ResourceNotFoundException;
+import com.arasu.bar.bar.application.exception.ResourceNotFoundException;
 import com.arasu.bar.bar.responses.BarResponse;
 import com.arasu.bar.bar.responses.GeneralResponse;
 import com.arasu.bar.bar.utils.Utils;

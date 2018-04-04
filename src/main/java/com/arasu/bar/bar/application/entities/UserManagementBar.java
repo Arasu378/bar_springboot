@@ -45,6 +45,11 @@ public class UserManagementBar  implements Serializable {
     @JsonProperty("ParentUserProfileId")
     private Long parentUserProfileId;
 
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "UserProfileId", nullable = false)
+//    private UserManagement barList;
+
     public UserManagementBar() {
     }
 

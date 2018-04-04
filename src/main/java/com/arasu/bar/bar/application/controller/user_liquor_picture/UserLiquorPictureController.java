@@ -3,6 +3,7 @@ package com.arasu.bar.bar.application.controller.user_liquor_picture;
 import com.arasu.bar.bar.application.AbstractRestHandler;
 import com.arasu.bar.bar.application.entities.UserLiquor;
 import com.arasu.bar.bar.application.entities.UserLiquorPicture;
+import com.arasu.bar.bar.application.model.UserLiquorPictureInput;
 import com.arasu.bar.bar.responses.GeneralResponse;
 import com.arasu.bar.bar.responses.UserLiquorPictureResponse;
 import com.arasu.bar.bar.utils.Constants;
@@ -67,11 +68,29 @@ public class UserLiquorPictureController extends AbstractRestHandler {
                                               @RequestParam("PictureName") String pictureName,
                                             @ApiParam(value = "UserProfileId is required", required = true)
                                               @RequestParam("UserProfileId") Long userProfileId,
-                                            @ApiParam("Data")MultipartFile multipartFile) throws Exception {
+                                            @ApiParam(value = "Data is required.", required = true)
+                                            @RequestParam("Data") MultipartFile multipartFile) throws Exception {
         UserLiquorPictureResponse userLiquorPictureResponse = this.userLiquorPictureService.insertPicture(pictureName,userProfileId,multipartFile);
         checkResourceFound(userLiquorPictureResponse);
         return userLiquorPictureResponse;
     }
+
+    @RequestMapping(value = Constants.INSERT_PICTURE_URL,
+            method = RequestMethod.POST,
+            produces = {"application/json", "application/xml"},
+            consumes = {"application/json", "application/xml"})
+    @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation(value = "Insert a single PICTURE by url.", notes = "you have to provide picture input.")
+    public
+    @ResponseBody
+    UserLiquorPictureResponse insertUserLiquorPictureUrl(@ApiParam(value = "UserLiquorPictureInput is required.", required = true)
+                                                         @RequestBody UserLiquorPictureInput userLiquorPictureInput) throws Exception {
+        UserLiquorPictureResponse userLiquorPictureResponse = this.userLiquorPictureService.insertPictureURL(userLiquorPictureInput);
+        checkResourceFound(userLiquorPictureResponse);
+        return userLiquorPictureResponse;
+    }
+
+
     @RequestMapping(value = Constants.UPDATE_PICTURE,
             method = RequestMethod.PUT,
             produces = {"application/json", "application/xml"},

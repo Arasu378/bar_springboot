@@ -25,8 +25,9 @@ public class UserManagementBarInput {
     @JsonProperty("UserManagementId")
     public Long userManagementId;
 
-    @JsonProperty("BarId")
-    public Long barId;
+    // this id is for barId;
+    @JsonProperty("Id")
+    public Long id;
 
     @JsonProperty("ParentUserProfileId")
     public Long parentUserProfileId;

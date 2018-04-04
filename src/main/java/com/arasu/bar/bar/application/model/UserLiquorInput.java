@@ -39,7 +39,7 @@ public class UserLiquorInput {
     public String liquorCapacity;
 
     @JsonProperty("Shots")
-    public String shots;
+    public Integer shots;
 
     @NotBlank
     @NotNull
@@ -50,13 +50,13 @@ public class UserLiquorInput {
     public String subCategory;
 
     @JsonProperty("ParLevel")
-    public String parLevel;
+    public Integer parLevel;
 
     @JsonProperty("DistributorName")
     public String distributorName;
 
     @JsonProperty("PriceUnit")
-    public String priceUnit;
+    public Integer priceUnit;
 
     @JsonProperty("BinNumber")
     public String binNumber;
@@ -74,8 +74,9 @@ public class UserLiquorInput {
     public String emptyWeight;
 
     @JsonProperty("TotalBottles")
-    public String totalBottles;
+    public Integer totalBottles;
 
+    // Picture id is commented to get id from picture url from service class
     @JsonProperty("PictureId")
     public Long pictureId;
 
@@ -84,6 +85,10 @@ public class UserLiquorInput {
 
     @JsonProperty("MaxValue")
     public Double maxValue;
+
+
+    @JsonProperty("PictureURL")
+    public String pictureURL;
 
 
     public UserLiquorInput(){}

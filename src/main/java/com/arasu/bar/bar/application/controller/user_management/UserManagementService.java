@@ -1,13 +1,12 @@
 package com.arasu.bar.bar.application.controller.user_management;
 
 import com.arasu.bar.bar.application.controller.user.UserService;
-import com.arasu.bar.bar.application.entities.User;
 import com.arasu.bar.bar.application.entities.UserManagement;
 import com.arasu.bar.bar.application.entities.UserManagementBar;
 import com.arasu.bar.bar.application.model.*;
 import com.arasu.bar.bar.application.repository.UserManagementBarRepository;
 import com.arasu.bar.bar.application.repository.UserManagementRepository;
-import com.arasu.bar.bar.exception.ResourceNotFoundException;
+import com.arasu.bar.bar.application.exception.ResourceNotFoundException;
 import com.arasu.bar.bar.responses.GeneralResponse;
 import com.arasu.bar.bar.responses.UserManagementResponse;
 import com.arasu.bar.bar.utils.Utils;
@@ -120,7 +119,7 @@ public class UserManagementService {
         userManagementBar.setBarName(userManagementBarInput.getBarName());
         userManagementBar.setCreatedOn(Utils.getCurrentDate());
         userManagementBar.setUserProfileId(userManagementBarInput.getUserProfileId());
-        userManagementBar.setBarId(userManagementBarInput.getBarId());
+        userManagementBar.setBarId(userManagementBarInput.getId());
         userManagementBar.setParentUserProfileId(userManagementBarInput.getParentUserProfileId());
 
         UserManagementBar userManagementBar1 = this.userManagementBarRepository.save(userManagementBar);

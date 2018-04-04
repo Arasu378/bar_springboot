@@ -1,11 +1,11 @@
 package com.arasu.bar.bar.application.controller.user_liquor_picture;
 
 import com.arasu.bar.bar.application.entities.LiquorCategory;
-import com.arasu.bar.bar.application.entities.User;
 import com.arasu.bar.bar.application.entities.UserLiquorPicture;
+import com.arasu.bar.bar.application.model.UserLiquorPictureInput;
 import com.arasu.bar.bar.application.repository.LiquorCategoryRepository;
 import com.arasu.bar.bar.application.repository.UserLiquorPictureRepository;
-import com.arasu.bar.bar.exception.ResourceNotFoundException;
+import com.arasu.bar.bar.application.exception.ResourceNotFoundException;
 import com.arasu.bar.bar.responses.GeneralResponse;
 import com.arasu.bar.bar.responses.UserLiquorPictureResponse;
 import com.arasu.bar.bar.utils.Utils;
@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 @Service
 public class UserLiquorPictureService {
@@ -32,6 +31,7 @@ public class UserLiquorPictureService {
 
     @Autowired
     private LiquorCategoryRepository liquorCategoryRepository;
+
 
 
     public Page<UserLiquorPicture> getPicturesByUserProfileId(Integer page, Integer size, Long userProfileId) {
@@ -70,7 +70,19 @@ public class UserLiquorPictureService {
         if (userLiquorPicture == null) {
             return new UserLiquorPictureResponse(false,"picture is not inserted",0L);
         }
-        return new UserLiquorPictureResponse(true, "picture is inserted",input.getId());
+        return new UserLiquorPictureResponse(true, "picture is inserted",userLiquorPicture.getId());
+    }
+    public UserLiquorPictureResponse insertPictureURL(UserLiquorPictureInput userLiquorPictureInput) throws Exception{
+        UserLiquorPicture input = new UserLiquorPicture();
+        input.setPictureName(userLiquorPictureInput.getPictureName());
+        input.setCreatedOn(Utils.getCurrentDate());
+        input.setUserProfileId(userLiquorPictureInput.getUserProfileId());
+        input.setData(Utils.recoverImageFromUrl(userLiquorPictureInput.getPictureURL()));
+        UserLiquorPicture userLiquorPicture = pictureRepository.save(input);
+        if (userLiquorPicture == null) {
+            return new UserLiquorPictureResponse(false, "picture is not inserted", 0L);
+        }
+        return new UserLiquorPictureResponse(true, "picture inserted", userLiquorPicture.getId());
     }
     public UserLiquorPictureResponse updatePicture(String pictureName, Long userProfileId, MultipartFile multipartFile, Long pictureId) throws IOException {
         UserLiquorPicture userLiquorPicture = pictureRepository.findById(pictureId).orElseThrow(() -> new ResourceNotFoundException("PictureId : "+ pictureId));

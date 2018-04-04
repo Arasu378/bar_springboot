@@ -1,12 +1,11 @@
 package com.arasu.bar.bar.application.controller.user_liquor;
 
-import com.arasu.bar.bar.application.entities.User;
 import com.arasu.bar.bar.application.entities.UserLiquor;
+import com.arasu.bar.bar.application.entities.UserLiquorPicture;
 import com.arasu.bar.bar.application.model.UserLiquorInput;
-import com.arasu.bar.bar.application.model.UserLiquorPictureInput;
-import com.arasu.bar.bar.application.repository.LiquorCategoryRepository;
+import com.arasu.bar.bar.application.repository.UserLiquorPictureRepository;
 import com.arasu.bar.bar.application.repository.UserLiquorRepository;
-import com.arasu.bar.bar.exception.ResourceNotFoundException;
+import com.arasu.bar.bar.application.exception.ResourceNotFoundException;
 import com.arasu.bar.bar.responses.GeneralResponse;
 import com.arasu.bar.bar.responses.UserLiquorResponse;
 import com.arasu.bar.bar.utils.Utils;
@@ -26,6 +25,10 @@ public class UserLiquorService {
     private Logger log = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private UserLiquorRepository userLiquorRepository;
+
+    @Autowired
+    private UserLiquorPictureRepository pictureRepository;
+
 
 
     public Page<UserLiquor> getLiquorsByUserProfileId(Integer page, Integer size, Long userProfileId) {
@@ -77,6 +80,37 @@ public class UserLiquorService {
         }
         return new UserLiquorResponse(true, "success", null);
 
+    }
+
+    public UserLiquorResponse insertUserLiquorWithPictureURL(UserLiquorInput userLiquorInput) throws Exception {
+
+        Long isPictureInserted = insertUserLiquorWithPicture(userLiquorInput.getLiquorName(), userLiquorInput.getUserProfileId(), userLiquorInput.pictureURL);
+        if (isPictureInserted == 0L) {
+            return new UserLiquorResponse(false, "user liquor picture is not inserted!", null);
+        }
+        Integer userLiquorInsert = userLiquorRepository.insertUserLiquorQuery(userLiquorInput.getUserProfileId(),userLiquorInput.getBarId(),
+                userLiquorInput.getSectionId(), userLiquorInput.getLiquorName(), userLiquorInput.getLiquorCapacity(), userLiquorInput.getShots(),
+                userLiquorInput.getCategory(), userLiquorInput.getSubCategory(), userLiquorInput.getParLevel(), userLiquorInput.getDistributorName(),
+                userLiquorInput.getPriceUnit(), userLiquorInput.getBinNumber(), userLiquorInput.getProductCode(), Utils.getCurrentDate(),
+                userLiquorInput.getMinValue(), userLiquorInput.getMaxValue(), userLiquorInput.getType(), userLiquorInput.getFullWeight(),
+                userLiquorInput.getEmptyWeight(), userLiquorInput.getTotalBottles(),isPictureInserted);
+        if (userLiquorInsert == 0) {
+            return new UserLiquorResponse(false, "user liquor is not inserted!", null);
+        }
+        return new UserLiquorResponse(true, "success", null);
+    }
+
+    public Long insertUserLiquorWithPicture(String pictureName, Long userProfileId, String pictureURL) throws Exception{
+        UserLiquorPicture inputField = new UserLiquorPicture();
+        inputField.setPictureName(pictureName);
+        inputField.setCreatedOn(Utils.getCurrentDate());
+        inputField.setUserProfileId(userProfileId);
+        inputField.setData(Utils.recoverImageFromUrl(pictureURL));
+        UserLiquorPicture userLiquorPicture = pictureRepository.save(inputField);
+        if (userLiquorPicture == null) {
+            return 0L;
+        }
+        return userLiquorPicture.getId();
     }
     public UserLiquorResponse updateUserLiquor(UserLiquorInput userLiquorInput, Long userLiquorId) {
         UserLiquor userLiquor = this.userLiquorRepository.findById(userLiquorId).orElseThrow(() -> new ResourceNotFoundException("UserLiquorId: "+ userLiquorId));
