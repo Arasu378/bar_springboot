@@ -1,10 +1,13 @@
 package com.arasu.bar.bar.application.controller.bar;
 
 import com.arasu.bar.bar.application.entities.Bar;
+import com.arasu.bar.bar.application.entities.UserLiquor;
 import com.arasu.bar.bar.application.model.BarInput;
 import com.arasu.bar.bar.application.model.BarUpdate;
 import com.arasu.bar.bar.application.repository.BarRepository;
 import com.arasu.bar.bar.application.exception.ResourceNotFoundException;
+import com.arasu.bar.bar.application.repository.SectionRepository;
+import com.arasu.bar.bar.application.repository.UserLiquorRepository;
 import com.arasu.bar.bar.responses.BarResponse;
 import com.arasu.bar.bar.responses.GeneralResponse;
 import com.arasu.bar.bar.utils.Utils;
@@ -21,6 +24,14 @@ public class BarService {
     private Logger log = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private BarRepository barRepository;
+
+    @Autowired
+    private SectionRepository sectionRepository;
+
+    @Autowired
+    private UserLiquorRepository userLiquorRepository;
+
+
     public Page<Bar> getAllBars(Integer page, Integer size, Long userProfileId) {
         Page pageOfBar = barRepository.findBarsByUserProfileId(userProfileId, PageRequest.of(page,size));
         return pageOfBar;
@@ -46,9 +57,17 @@ public class BarService {
         return new BarResponse(true, "success", bar);
     }
     public GeneralResponse deleteBar(Long barId) {
+        deleteUserLiquorByBarId(barId);
+        deleteSectionByBarId(barId);
         Bar bar = barRepository.findById(barId).orElseThrow(() -> new ResourceNotFoundException("BarId : "+ barId));
          barRepository.delete(bar);
          return new GeneralResponse(true, "deleted Successfully!");
+    }
+    public void deleteUserLiquorByBarId(Long barId) {
+        userLiquorRepository.deleteUserLiquorsByBarId(barId);
+    }
+    public void deleteSectionByBarId(Long barId) {
+        sectionRepository.deleteSectionsByBarId(barId);
     }
 
 

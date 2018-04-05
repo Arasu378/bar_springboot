@@ -1,9 +1,11 @@
 package com.arasu.bar.bar.application.controller.section;
 
 import com.arasu.bar.bar.application.entities.Section;
+import com.arasu.bar.bar.application.entities.UserLiquor;
 import com.arasu.bar.bar.application.model.SectionInput;
 import com.arasu.bar.bar.application.repository.SectionRepository;
 import com.arasu.bar.bar.application.exception.ResourceNotFoundException;
+import com.arasu.bar.bar.application.repository.UserLiquorRepository;
 import com.arasu.bar.bar.responses.GeneralResponse;
 import com.arasu.bar.bar.responses.SectionResponse;
 import com.arasu.bar.bar.utils.Utils;
@@ -19,6 +21,10 @@ public class SectionService {
     private Logger log = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private SectionRepository sectionRepository;
+
+    @Autowired
+    private UserLiquorRepository userLiquorRepository;
+
     public Page<Section> getAllSectionByUserProfileId(Integer page, Integer size, Long userProfileId) {
         Page pageOfSection = sectionRepository.findSectionsByUserProfileId(userProfileId, PageRequest.of(page, size));
         return pageOfSection;
@@ -48,8 +54,13 @@ public class SectionService {
         return new SectionResponse(true,"success", sectionUpdated);
     }
     public GeneralResponse deleteSection(Long sectionId) {
+        deleteUserLiquorBySectionId(sectionId);
         Section section = sectionRepository.findById(sectionId).orElseThrow(() -> new ResourceNotFoundException("Section Id: "+ sectionId));
         sectionRepository.delete(section);
         return new GeneralResponse(true, "deleted Successfully!");
+    }
+
+    public void deleteUserLiquorBySectionId(Long sectionId) {
+        userLiquorRepository.deleteUserLiquorsBySectionId(sectionId);
     }
 }

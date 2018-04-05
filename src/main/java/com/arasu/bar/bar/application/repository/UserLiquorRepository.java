@@ -92,4 +92,15 @@ public interface UserLiquorRepository extends PagingAndSortingRepository<UserLiq
     @Query(value = "SELECT DISTINCT `DistributorName`, `Id` FROM user_liquor WHERE UserProfileId = :UserProfileId", nativeQuery = true)
     List<Object[]> getDistributorsList(@Param("UserProfileId") Long UserProfileId);
 
+//
+//    @Query(value = "DELETE FROM user_liquor WHERE BarId = :BarId", nativeQuery = true)
+//    void deleteLiquorByBarId(@Param("BarId")Long BarId);
+    @Transactional
+    @Modifying
+    void deleteUserLiquorsByBarId(Long BarId);
+
+    @Transactional
+    @Modifying
+    void deleteUserLiquorsBySectionId(Long SectionId);
+
 }
