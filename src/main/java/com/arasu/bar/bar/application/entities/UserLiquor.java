@@ -110,6 +110,10 @@ public class UserLiquor implements Serializable {
     @JsonProperty("TotalBottles")
     private Long totalBottles;
 
+    @Column(name = "DistributorId")
+    @JsonProperty("DistributorId")
+    private Long distributorId;
+
     public UserLiquor() {
     }
 
@@ -295,5 +299,13 @@ public class UserLiquor implements Serializable {
 
     public void setTotalBottles(Long totalBottles) {
         this.totalBottles = totalBottles;
+    }
+
+    public Long getDistributorId() {
+        return distributorId;
+    }
+
+    public void setDistributorId(Long distributorId) {
+        this.distributorId = distributorId;
     }
 }

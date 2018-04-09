@@ -56,6 +56,6 @@ public class Constants {
     public static final String PAR_LIST = "/parList/{userProfileId}";
 
 
-    public static final String PICTURE_URL = "http://192.168.1.15:8091/bar/v1/picture/category/";
+    public static final String PICTURE_URL = "http://192.168.1.20:8091/bar/v1/picture/category/";
 
 }
