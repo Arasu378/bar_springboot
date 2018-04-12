@@ -86,6 +86,7 @@ public class UserService implements UserDetailsService {
         user.setUserLastName(userManagementUpdate.getUserLastName());
         user.setUserVenueName(userManagementUpdate.getUserVenueName());
         user.setUserCountry(userManagementUpdate.getUserCountry());
+        user.setUserMobileNumber(userManagementUpdate.getUserMobileNumber());
         user.setModifiedOn(Utils.getCurrentDate());
         user.setUserRole(userManagementUpdate.getUserRole());
         user.setParentUserProfileId(userManagementUpdate.getParentUserProfileId());
@@ -148,6 +149,7 @@ public class UserService implements UserDetailsService {
         user.setUserEmail(register.getUserEmail());
         user.setUserVenueName(register.getUserVenueName());
         user.setUserCountry(register.getUserCountry());
+        user.setUserMobileNumber(register.getUserMobileNumber());
         user.setUserOftenInventory(register.getUserOftenInventory());
         user.setUserInventoryTime(register.getUserInventoryTime());
         User user1 = userRepository.save(user);

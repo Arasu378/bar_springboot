@@ -49,6 +49,9 @@ public class UserManagementUpdate {
     @JsonProperty("UserVenueName")
     public String userVenueName;
 
+ @JsonProperty("UserMobileNumber")
+    public String userMobileNumber;
+
     @JsonProperty("UserManagementBar")
     public List<UserManagementBarUpdate> userManagementBar;
 
