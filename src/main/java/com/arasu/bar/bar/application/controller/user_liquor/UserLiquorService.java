@@ -183,7 +183,7 @@ public class UserLiquorService {
         if (userLiquorInsert == 0) {
             return new UserLiquorResponse(false, "user liquor is not updated!", null);
         }
-        return new UserLiquorResponse(true, "success", null);
+        return new UserLiquorResponse(true, "Updated Successfully", null);
 
 
 //        UserLiquor userLiquorInsert = userLiquorRepository.save(userLiquor);
