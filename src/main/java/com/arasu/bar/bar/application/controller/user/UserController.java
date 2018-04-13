@@ -87,8 +87,10 @@ public class UserController extends AbstractRestHandler {
     LoginResponse login(@RequestBody Login login,
                                HttpServletRequest request, HttpServletResponse response) throws  Exception {
         LoginResponse loginResponse = this.userService.login(login);
-        String token = this.authenticationService.getToken(login.getUserEmail(), login.getPassword());
-        loginResponse.getUser().setUserAuthorizationKey(token);
+        if (loginResponse.getIsSuccess()) {
+            String token = this.authenticationService.getToken(login.getUserEmail(), login.getPassword());
+            loginResponse.getUser().setUserAuthorizationKey(token);
+        }
         checkResourceFound(loginResponse);
         return loginResponse;
 

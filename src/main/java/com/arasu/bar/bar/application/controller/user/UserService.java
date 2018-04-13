@@ -44,6 +44,9 @@ public class UserService implements UserDetailsService {
     }
     public LoginResponse login(Login login) {
         User user = findOne(login.getUserEmail());
+        if (user == null) {
+            return new LoginResponse(false, "Email not found", null);
+        }
         if (PasswordChecker.checkPassword(login.getPassword(), user.getPassword())) {
             return new LoginResponse(true,"success", user);
         }
@@ -52,7 +55,7 @@ public class UserService implements UserDetailsService {
     }
 
     public GeneralResponse register(Register user) throws Exception {
-        boolean isEmailThere = findUserEmail(user.getUserFirstName());
+        boolean isEmailThere = findUserEmail(user.getUserEmail());
         if (!isEmailThere) {
             String randomPassword = Utils.RandomPassword();
             String encodedPassword = PasswordChecker.encodedPassword(randomPassword);
