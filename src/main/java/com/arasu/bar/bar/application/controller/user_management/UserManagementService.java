@@ -58,7 +58,7 @@ public class UserManagementService {
         if (userManagement1 == null) {
             return new UserManagementResponse(false, "user management is not inserted", null);
         }
-        return new UserManagementResponse(true, "success", userManagement1);
+        return new UserManagementResponse(true, "Added Successfully", userManagement1);
     }
 
     public UserManagementResponse updateUserManagement(UserManagementUpdate userManagementInput, Long userManagementId) {
@@ -79,12 +79,12 @@ public class UserManagementService {
         if (userManagement1 == null) {
             return new UserManagementResponse(false, "user management is not updated", null);
         }
-        return new UserManagementResponse(true, "success", userManagement1);
+        return new UserManagementResponse(true, "Updated Successfully", userManagement1);
     }
     public GeneralResponse deleteUserManagement(Long userManagementId) {
         UserManagement userManagement = userManagementRepository.findById(userManagementId).orElseThrow(() -> new ResourceNotFoundException("UserManagementId : "+ userManagementId));
         userManagementRepository.delete(userManagement);
-        return new GeneralResponse(true, "success");
+        return new GeneralResponse(true, "Deleted Successfully");
     }
 
     public UserManagementResponse insertUserProfileToUserManagement(UserManagementInput userManagementInput) throws Exception {

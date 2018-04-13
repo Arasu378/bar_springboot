@@ -45,7 +45,7 @@ public class BarService {
         if (bar == null) {
             return  new BarResponse(false, "bar not inserted!", null);
         }
-        return new BarResponse(true, "success", bar);
+        return new BarResponse(true, "Added Successfully", bar);
     }
     public BarResponse updateBar(BarUpdate barInput, Long barId) {
         Bar barUpdate = barRepository.findById(barId).orElseThrow(() -> new ResourceNotFoundException("BarId : "+ barId));
@@ -54,14 +54,14 @@ public class BarService {
             barUpdate.setModifiedOn(Utils.getCurrentDate());
 
         Bar bar = barRepository.save(barUpdate);
-        return new BarResponse(true, "success", bar);
+        return new BarResponse(true, "Updated Successfully", bar);
     }
     public GeneralResponse deleteBar(Long barId) {
         deleteUserLiquorByBarId(barId);
         deleteSectionByBarId(barId);
         Bar bar = barRepository.findById(barId).orElseThrow(() -> new ResourceNotFoundException("BarId : "+ barId));
          barRepository.delete(bar);
-         return new GeneralResponse(true, "deleted Successfully!");
+         return new GeneralResponse(true, "Deleted Successfully!");
     }
     public void deleteUserLiquorByBarId(Long barId) {
         userLiquorRepository.deleteUserLiquorsByBarId(barId);

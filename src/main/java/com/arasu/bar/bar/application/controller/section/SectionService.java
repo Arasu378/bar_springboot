@@ -42,7 +42,7 @@ public class SectionService {
         if ( section == null ) {
             return new SectionResponse(false, "section is not inserted!", null);
         }
-        return new SectionResponse(true, "success", section);
+        return new SectionResponse(true, "Added Successfully", section);
     }
     public SectionResponse updateSection(SectionInput sectionInput, Long sectionId) {
         Section section = sectionRepository.findById(sectionId).orElseThrow(() -> new ResourceNotFoundException("SectionId : "+ sectionId));
@@ -51,13 +51,13 @@ public class SectionService {
         section.setModifiedOn(Utils.getCurrentDate());
         section.setSectionName(sectionInput.getSectionName());
         Section sectionUpdated = sectionRepository.save(section);
-        return new SectionResponse(true,"success", sectionUpdated);
+        return new SectionResponse(true,"Updated Successfully", sectionUpdated);
     }
     public GeneralResponse deleteSection(Long sectionId) {
         deleteUserLiquorBySectionId(sectionId);
         Section section = sectionRepository.findById(sectionId).orElseThrow(() -> new ResourceNotFoundException("Section Id: "+ sectionId));
         sectionRepository.delete(section);
-        return new GeneralResponse(true, "deleted Successfully!");
+        return new GeneralResponse(true, "Deleted Successfully");
     }
 
     public void deleteUserLiquorBySectionId(Long sectionId) {

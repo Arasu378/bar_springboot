@@ -87,7 +87,7 @@ public class UserLiquorService {
         if (userLiquorInsert == 0) {
             return new UserLiquorResponse(false, "user liquor is not inserted!", null);
         }
-        return new UserLiquorResponse(true, "success", null);
+        return new UserLiquorResponse(true, "Added Successfully", null);
 
     }
 
@@ -106,7 +106,7 @@ public class UserLiquorService {
         if (userLiquorInsert == 0) {
             return new UserLiquorResponse(false, "user liquor is not inserted!", null);
         }
-        return new UserLiquorResponse(true, "success", null);
+        return new UserLiquorResponse(true, "Added Successfully", null);
     }
     public UserLiquorResponse updateUserLiquorPicture(UserLiquorInput userLiquorInput, Long userLiquorId) throws Exception {
         UserLiquor userLiquor = this.userLiquorRepository.findById(userLiquorId).orElseThrow(() -> new ResourceNotFoundException("UserLiquorId: "+ userLiquorId));
@@ -124,7 +124,7 @@ public class UserLiquorService {
         if (userLiquorInsert == 0) {
             return new UserLiquorResponse(false, "user liquor is not updated!", null);
         }
-        return new UserLiquorResponse(true, "success", null);
+        return new UserLiquorResponse(true, "Updated Successfully", null);
     }
     public Long insertUserLiquorWithPicture(String pictureName, Long userProfileId, String pictureURL) throws Exception{
         UserLiquorPicture inputField = new UserLiquorPicture();
@@ -199,7 +199,7 @@ public class UserLiquorService {
     public GeneralResponse deleteUserLiquor(Long userLiquorId) {
         UserLiquor userLiquor = this.userLiquorRepository.findById(userLiquorId).orElseThrow(() -> new ResourceNotFoundException("UserLiquorId: "+userLiquorId));
         userLiquorRepository.delete(userLiquor);
-        return new GeneralResponse(true, "deleted successfully!");
+        return new GeneralResponse(true, "Deleted Successfully");
     }
     public List<Distributors> getDistributors(Long userProfileId) {
       List<Object[]> userLiquorList =  userLiquorRepository.getDistributorsList(userProfileId);

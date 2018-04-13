@@ -70,7 +70,7 @@ public class UserLiquorPictureService {
         if (userLiquorPicture == null) {
             return new UserLiquorPictureResponse(false,"picture is not inserted",0L);
         }
-        return new UserLiquorPictureResponse(true, "picture is inserted",userLiquorPicture.getId());
+        return new UserLiquorPictureResponse(true, "Added Successfully",userLiquorPicture.getId());
     }
     public UserLiquorPictureResponse insertPictureURL(UserLiquorPictureInput userLiquorPictureInput) throws Exception{
         UserLiquorPicture input = new UserLiquorPicture();
@@ -82,7 +82,7 @@ public class UserLiquorPictureService {
         if (userLiquorPicture == null) {
             return new UserLiquorPictureResponse(false, "picture is not inserted", 0L);
         }
-        return new UserLiquorPictureResponse(true, "picture inserted", userLiquorPicture.getId());
+        return new UserLiquorPictureResponse(true, "Added Successfully", userLiquorPicture.getId());
     }
     public UserLiquorPictureResponse updatePicture(String pictureName, Long userProfileId, MultipartFile multipartFile, Long pictureId) throws IOException {
         UserLiquorPicture userLiquorPicture = pictureRepository.findById(pictureId).orElseThrow(() -> new ResourceNotFoundException("PictureId : "+ pictureId));
@@ -94,11 +94,11 @@ public class UserLiquorPictureService {
         if (updatedPicture == null) {
             return new UserLiquorPictureResponse(false, "Picture is not updated!", 0L);
         }
-        return new UserLiquorPictureResponse(true, "Picture is updated",userLiquorPicture.getId());
+        return new UserLiquorPictureResponse(true, "Updated Successfully",userLiquorPicture.getId());
     }
     public GeneralResponse deletePicture(Long pictureId) {
         UserLiquorPicture userLiquorPicture = pictureRepository.findById(pictureId).orElseThrow(() -> new ResourceNotFoundException("PictureId : "+ pictureId));
         pictureRepository.delete(userLiquorPicture);
-        return new GeneralResponse(true,"successfully Deleted!");
+        return new GeneralResponse(true,"Deleted Successfully");
     }
 }

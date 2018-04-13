@@ -32,7 +32,7 @@ public class DistributorService {
         if (distributor == null) {
             return new DistributorResponse(false, "distributor is not inserted!", null);
         }
-        return new DistributorResponse(true, "success", distributor);
+        return new DistributorResponse(true, "Added Successfully", distributor);
     }
     public DistributorResponse updateDistributor(DistributorInput distributorInput, Long distributorId) {
         Distributor distributor = distributorRepository.findById(distributorId).orElseThrow(() -> new ResourceNotFoundException("Distributor Id : : "+ distributorId));
@@ -43,12 +43,12 @@ public class DistributorService {
         distributor.setAddress(distributorInput.getAddress());
         distributor.setModifiedOn(Utils.getCurrentDate());
         Distributor distributorUpdate = distributorRepository.save(distributor);
-        return new DistributorResponse(true, "success", distributorUpdate);
+        return new DistributorResponse(true, "Updated Successfully", distributorUpdate);
     }
     public GeneralResponse deleteDistributor(Long distributorId) {
         Distributor distributor = distributorRepository.findById(distributorId).orElseThrow(() -> new ResourceNotFoundException("Distributor ID : "+ distributorId));
         distributorRepository.delete(distributor);
-        return new GeneralResponse(true,"successfully deleted!");
+        return new GeneralResponse(true,"Deleted Successfully");
     }
 
 }

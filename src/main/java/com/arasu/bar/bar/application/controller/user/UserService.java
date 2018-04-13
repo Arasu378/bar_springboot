@@ -153,7 +153,7 @@ public class UserService implements UserDetailsService {
         user.setUserOftenInventory(register.getUserOftenInventory());
         user.setUserInventoryTime(register.getUserInventoryTime());
         User user1 = userRepository.save(user);
-        return new LoginResponse(true,"success", user1);
+        return new LoginResponse(true,"Updated Successfully", user1);
     }
 
 

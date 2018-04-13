@@ -32,7 +32,7 @@ public class EmailService {
         if ( email == null ) {
             return new EmailResponse(false, "email is not inserted!", null);
         }
-        return new EmailResponse(true, "success", email);
+        return new EmailResponse(true, "Added Successfully", email);
     }
     public EmailResponse updateEmail(EmailInput emailInput, Long emailId) {
         Email email = emailManagementRepository.findById(emailId).orElseThrow(() -> new ResourceNotFoundException("EmailId : "+ emailId));
@@ -40,11 +40,11 @@ public class EmailService {
         email.setModifiedOn(Utils.getCurrentDate());
         email.setUserEmail(emailInput.getUserEmail());
         Email emailUpdated = emailManagementRepository.save(email);
-        return new EmailResponse(true,"success", emailUpdated);
+        return new EmailResponse(true,"Updated Successfully", emailUpdated);
     }
     public GeneralResponse deleteEmail(Long emailId) {
         Email email = emailManagementRepository.findById(emailId).orElseThrow(() -> new ResourceNotFoundException("EmailId: "+ emailId));
         emailManagementRepository.delete(email);
-        return new GeneralResponse(true, "deleted Successfully!");
+        return new GeneralResponse(true, "Deleted Successfully");
     }
 }
