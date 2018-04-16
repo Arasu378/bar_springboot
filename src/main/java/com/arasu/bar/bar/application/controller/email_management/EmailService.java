@@ -14,6 +14,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
+
 @Service
 public class EmailService {
     private Logger log = LoggerFactory.getLogger(this.getClass());
